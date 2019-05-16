@@ -253,12 +253,23 @@ def stops(route_id):
 @app.route('/CAAMBus/itineraries', methods=['GET'])
 def itineraries():
     itineraries = ItineraryHandler().getAllItineraries()
-    print(itineraries)
+
     if itineraries:
         return render_template('itineraries.html', itineraries=itineraries)
 
     msg="No Itineraries Found"
     return render_template('itineraries.html', msg=msg)
+
+@app.route('/CAAMBus/itineraries/<int:user_id>', methods=['GET'])
+@is_logged_in
+def userItineraries(user_id):
+    itineraries = ItineraryHandler().getItinerariesByUserId(user_id)
+
+    if itineraries:
+        return render_template('my_itineraries.html', itineraries=itineraries)
+
+    msg="No Itineraries Found"
+    return render_template('my_itineraries.html', msg=msg)
 
 @app.route('/CAAMBus/itineraries/create', methods=['GET', 'POST'])
 @is_logged_in

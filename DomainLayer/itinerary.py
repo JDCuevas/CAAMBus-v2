@@ -53,3 +53,16 @@ class ItineraryRepository:
 		itinerary_id = self.dao.deleteItinerary(itinerary_id)
 
 		return itinerary_id
+
+	def getItinerariesByUserId(self, user_id):
+		result = self.dao.getItinerariesByUserId(user_id)
+		itineraries = []
+
+		for row in result:
+			itinerary = Itinerary(row)
+			itinerary.itinerary['driver'] = row['first_name'] + " " + row['last_name']
+			itinerary.itinerary['trolley_plate'] = row['plate']
+			itinerary.itinerary['route'] = row['route_name']
+			itineraries.append(itinerary)
+
+		return itineraries

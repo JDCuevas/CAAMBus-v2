@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<br>
+	<h1>My Itineraries</h1>
+	<hr>
+
+	<h4>Search</h4>
+	<input class="form-control" id="myInput" type="text" placeholder="Date, time, trolley plate, route...">
+	<br>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Date</th>
+				<th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Driver</th>
+				<th class="text-center">Trolley Plate</th>
+				<th class="text-center">Route</th>
+				<th class="text-center">Stops</th>
+			</tr>
+		</thead>
+		<tbody id="searchableTable">
+			{% if session.logged_in %}
+				{% for itinerary in itineraries %}
+				<tr>
+					<td class="text-center" id="itinerary">{{itinerary.date}}</td>
+					<td class="text-center">{{itinerary.start_time}}</td>
+					<td class="text-center">{{itinerary.end_time}}</td>
+					<td class="text-center">{{itinerary.driver}}</td>
+					<td class="text-center">{{itinerary.trolley_plate}}</td>
+					<td class="text-center">{{itinerary.route}}</td>
+					<td class="text-center"><a href="/CAAMBus/stops/{{itinerary.route_id}}" class="btn btn-primary">View</a></td>
+				</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+{% endblock %}

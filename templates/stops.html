@@ -24,8 +24,12 @@
 				<td class="text-center" id="stop">{{stop.stop_name}}</td>
 				<td class="text-center">{{stop.latitude}}</td>
 				<td class="text-center">{{stop.longitude}}</td>
-				<td class="text-center"><a href="https://www.google.com/maps/search/?api=1&query={{stop.latitude}},{{stop.longitude}}" class="btn btn-primary">Open</a></td>
-				<td class="text-center"><a href="/CAAMBus/routes/{{route_id}}/remove/{{stop.stop_id}}" class="btn btn-danger">Remove</a></td>
+				<td class="text-center"><a href="https://www.google.com/maps/search/?api=1&query={{stop.latitude}},{{stop.longitude}}" class="btn btn-primary" target="_blank">Open</a></td>
+				{% if session.admin %}
+					<td class="text-center"><a href="/CAAMBus/routes/{{route_id}}/remove/{{stop.stop_id}}" class="btn btn-danger">Remove</a></td>
+				{% else %}
+					<td class="text-center"><a href="#" class="btn btn-secondary disabled">Remove</a></td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 		</tbody>

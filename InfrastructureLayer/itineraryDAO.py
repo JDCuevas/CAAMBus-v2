@@ -47,3 +47,11 @@ class ItineraryDao:
         result = cursor.fetchone()
 
         return result
+
+    def getItinerariesByUserId(self, user_id):
+        cursor = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        query = "select * from Itineraries natural inner join Drivers natural inner join Users natural inner join Routes natural inner join Trolleys where user_id=%s;"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchall()
+
+        return result

@@ -26,3 +26,14 @@ class ItineraryHandler:
                 itineraries.append(itineraryInfo)
 
         return itineraries
+
+    def getItinerariesByUserId(self, user_id):
+        result = self.repo.getItinerariesByUserId(user_id)
+        itineraries = []
+
+        if result:
+            for row in result:
+                itineraryInfo = row.getInfo()
+                itineraries.append(itineraryInfo)
+
+        return itineraries

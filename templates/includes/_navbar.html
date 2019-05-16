@@ -15,6 +15,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/CAAMBus/routes" id="routes_link">Routes</a>
       </li>
+      {% if session.logged_in and not session.admin %}
+        <li class="nav-item">
+          <a class="nav-link" href="/CAAMBus/itineraries/{{session.user_id}}" id="my_itineraries_link">My Itineraries</a>
+        </li>
+      {% endif %}
       {% if session.logged_in and session.admin %}
         <li class="nav-item">
           <a class="nav-link" href="/CAAMBus/drivers" id="drivers_link">Drivers</a>

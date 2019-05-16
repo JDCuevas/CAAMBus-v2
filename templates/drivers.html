@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<br>
+	<h1>Drivers</h1>
+	<hr>
+
+	<h4>Search</h4>
+	<input class="form-control" id="myInput" type="text" placeholder="First names, last names, keywords or uploaders...">
+	<br>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Driver</th>
+				<th class="text-center">License</th>
+				<th class="text-center">Phone</th>
+				<th class="text-center">Delete Driver</th>
+			</tr>
+		</thead>
+		<tbody id="searchableTable">
+			{% for driver in drivers %}
+			<tr>
+				<td class="text-center" id="driver">{{driver.name}}</td>
+				<td class="text-center">{{driver.license}}</em></td>
+				<td class="text-center">{{driver.phone}}</td>
+				{% if session.admin %}
+					<td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
+				{% else %}
+					<td class="text-center"><a href="#" class="btn btn-secondary disabled">Delete</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{% if session.admin %}
+		<div class="container text-center" >
+			<a class="btn btn-success" href="/register" id="add_driver"> Add Driver </a>
+		</div>
+	{% endif %}
+
+{% endblock %}

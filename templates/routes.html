@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<br>
+	<h1>Routes</h1>
+	<hr>
+
+	<h4>Search</h4>
+	<input class="form-control" id="myInput" type="text" placeholder="Route name...">
+	<br>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Route</th>
+				<th class="text-center">Stops</th>
+				<th class="text-center">Delete Route</th>
+			</tr>
+		</thead>
+		<tbody id="searchableTable">
+			{% for route in routes %}
+			<tr>
+				<td class="text-center" id="route">{{route.route_name}}</td>
+				<td class="text-center"><a href="/CAAMBus/stops/{{route.route_id}}" class="btn btn-primary">View</a></td>
+				{% if session.admin %}
+					<td class="text-center"><a href="/CAAMBus/routes/delete/{{route.route_id}}" class="btn btn-danger">Delete</a></td>
+				{% else %}
+					<td class="text-center"><a href="/CAAMBus/routes/delete/{{route.route_id}}" class="btn btn-secondary disabled">Delete</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{% if session.admin %}
+		<form action="/CAAMBus/routes/create" method="POST">
+			<div class="form-group row">
+			    <label class="col-sm-3 col-form-label text-right">Route Name</label>
+			    <div class="col-sm-6">
+			      <input type="text" name="route_name" class="form-control" placeholder="Dummy Route">
+			    </div>
+			    <div class="col-sm-3">
+			       	 <button type="submit" class="btn btn-success "> Create Route </button>
+			    </div>
+		  	</div>
+		</form>
+	{% endif %}
+
+{% endblock %}

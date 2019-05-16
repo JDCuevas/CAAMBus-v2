@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<br>
+	<h1>Itineraries</h1>
+	<hr>
+
+	<h4>Search</h4>
+	<input class="form-control" id="myInput" type="text" placeholder="Plate, capacity, mileage...">
+	<br>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Date</th>
+				<th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Driver</th>
+				<th class="text-center">Trolley Plate</th>
+				<th class="text-center">Route</th>
+				<th class="text-center">Delete Itinerary</th>
+			</tr>
+		</thead>
+		<tbody id="searchableTable">
+			{% for itinerary in itineraries %}
+			<tr>
+				<td class="text-center" id="itinerary">{{itinerary.date}}</td>
+				<td class="text-center">{{itinerary.start_time}}</td>
+				<td class="text-center">{{itinerary.end_time}}</td>
+				<td class="text-center">{{itinerary.driver}}</td>
+				<td class="text-center">{{itinerary.trolley_plate}}</td>
+				<td class="text-center">{{itinerary.route}}</td>
+				{% if session.admin %}
+					<td class="text-center"><a href="/CAAMBus/itineraries/delete/{{itinerary.itinerary_id}}" class="btn btn-danger">Delete</a></td>
+				{% else %}
+					<td class="text-center"><a href="#" class="btn btn-secondary disabled">Delete</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{% if session.admin %}
+
+		<div class="container text-center" >
+			<a class="btn btn-success" href="/CAAMBus/itineraries/create" id="create_itinerary"> Create Itinerary </a>
+		</div>
+
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	{% if session.admin %}
+
+		<br>
+		<h3>Create Itinerary</h3>
+		<hr>
+
+		{% from 'includes/_formhelpers.html' import render_field %}
+		<form method="POST" action="" id="create_itinerary">
+		<div class="form-group">
+			{{ render_field(form.date, class="form-control", id="date") }}
+		</div>
+		<div class="form-group">
+			{{ render_field(form.start_time, class="form-control", id="start_time") }}
+		</div>
+		<div class="form-group">
+			{{ render_field(form.end_time, class="form-control", id="end_time") }}
+		</div>
+		<div class="form-group">
+			{{ render_field(form.driver_id, class="form-control", id="driver") }}
+		</div>
+		<div class="form-group">
+			{{ render_field(form.trolley_id, class="form-control", id="trolley") }}
+		</div>
+		<div class="form-group">
+			{{ render_field(form.route_id, class="form-control", id="route") }}
+		</div> 	
+		<div class="container text-center" >
+			<p><input class="btn btn-primary" type="submit" value="Create Itinerary", id="createItinerarySubmit"></p>
+		</div>
+	</form>
+
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<br>
+	<h1>Trolleys</h1>
+	<hr>
+
+	<h4>Search</h4>
+	<input class="form-control" id="myInput" type="text" placeholder="Plate, capacity, mileage...">
+	<br>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Plate</th>
+				<th class="text-center">Capacity</th>
+				<th class="text-center">Mileage</th>
+				<th class="text-center">Remove Trolley</th>
+			</tr>
+		</thead>
+		<tbody id="searchableTable">
+			{% for trolley in trolleys %}
+			<tr>
+				<td class="text-center" id="trolley">{{trolley.plate}}</td>
+				<td class="text-center">{{trolley.capacity}}</td>
+				<td class="text-center">{{trolley.mileage}}</td>
+				{% if session.admin %}
+					<td class="text-center"><a href="/CAAMBus/trolleys/delete/{{trolley.trolley_id}}" class="btn btn-danger">Remove</a></td>
+				{% else %}
+					<td class="text-center"><a href="" class="btn btn-secondary disabled">Remove</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{% if session.admin %}
+
+		<br>
+		<h3>Add A Trolley</h3>
+		<hr>
+
+		<form action="/CAAMBus/trolleys/add" method="POST">
+			<div class="form-group row">
+			    <label class="col-sm-2 col-form-label text-right">Plate</label>
+			    <div class="col-sm-10">
+			      <input type="text" name="plate" class="form-control" placeholder="GFN091">
+			    </div>
+		  	</div>
+		  	<div class="form-group row">
+			    <label class="col-sm-2 col-form-label text-right">Capacity</label>
+			    <div class="col-sm-10">
+			      <input type="int" name="capacity" class="form-control" placeholder="30">
+			    </div>
+		  	</div>
+		  	<div class="form-group row">
+			    <label class="col-sm-2 col-form-label text-right">Mileage</label>
+			    <div class="col-sm-10">
+			      <input type="int" name="mileage" class="form-control" placeholder="12000">
+			    </div>
+		  	</div>
+		  	<div class="container text-center" >
+				<button type="submit" class="btn btn-success "> Add Trolley </button>
+			</div>
+		
+		</form>
+
+	{% endif %}
+
+{% endblock %}

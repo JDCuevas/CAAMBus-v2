@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">CAAMBus</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/CAAMBus/itineraries" id="itineraries_link">Itineraries</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/CAAMBus/routes" id="routes_link">Routes</a>
+      </li>
+      {% if session.logged_in and session.admin %}
+        <li class="nav-item">
+          <a class="nav-link" href="/CAAMBus/drivers" id="drivers_link">Drivers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/CAAMBus/trolleys" id="routes_link">Trolleys</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Create User</a>
+        </li>
+      {% endif %}
+    </ul>
+
+    <ul class="navbar-nav navbar-right">
+      {% if session.logged_in %}
+        <span class="navbar-text">Welcome, </span>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-success" data-toggle="dropdown" data-target="dropdown_target" href="#">
+              {{session.username}}
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown_target">
+              <a class="dropdown-item" href="/logout" id="logout_link">Logout</a>
+          </div>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
